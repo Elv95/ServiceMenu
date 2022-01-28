@@ -22,6 +22,13 @@ The executable jar will be found in the target subdirectory and it will be calle
 
 ## Execution of the Jar
 
+In the directory where the jar is executed, there must be:
+
+- a directory named 'input'
+- ServiceMenu.json in the 'input' directory
+
+To run the jar :
+
 ```python
 java -jar servicemenu-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
