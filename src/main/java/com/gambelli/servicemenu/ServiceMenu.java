@@ -27,6 +27,9 @@ public class ServiceMenu {
 
         XSSFWorkbook workbook = populateWorkbook(menucontent, populateAttribute(), 0);
 
+        //sets column width
+        setColumnWidth(workbook);
+
         writeOutput(workbook);
 
     }
@@ -63,7 +66,7 @@ public class ServiceMenu {
      * Populates the row of the Workbook with the informations of the node (object menu)
      **/
     private static void populateRow(Object menu, XSSFWorkbook workbook, int depth) {
-        int i = getMaxDepth(menucontent);
+        int i = getMaxDepth(menucontent) - 2;
         XSSFRow row = workbook.getSheetAt(0).createRow(workbook.getSheetAt(0).getLastRowNum() + 1);
 
         //set the X on the corresponding depth cell
@@ -113,7 +116,7 @@ public class ServiceMenu {
         XSSFRow rowhead = sheet.createRow(0);
 
         //Depth cells
-        for (i = 0; i < (getMaxDepth(menucontent) + 1); i++) {
+        for (i = 0; i < (getMaxDepth(menucontent) - 1); i++) {
             rowhead.createCell(i).setCellValue(i);
         }
         //Attributes
@@ -123,9 +126,6 @@ public class ServiceMenu {
         rowhead.createCell(++i).setCellValue("GroupType");
         rowhead.createCell(++i).setCellValue("FlowType");
         rowhead.createCell(++i).setCellValue("ResourceId");
-
-        //sets column width
-        setColumnWidth(workbook);
 
         return workbook;
     }
@@ -145,15 +145,11 @@ public class ServiceMenu {
             workbook.getSheetAt(0).getRow(0).getCell(j).setCellStyle(style);
         }
 
-        for (int i = 0; i < (getMaxDepth(menucontent) + 1); i++) {
+        for (int i = 0; i < (getMaxDepth(menucontent) - 1); i++) {
             workbook.getSheetAt(0).setColumnWidth(i, 512);
         }
+        
 
-        workbook.getSheetAt(0).setColumnWidth(8, 11000);
-        workbook.getSheetAt(0).setColumnWidth(9, 3000);
-        workbook.getSheetAt(0).setColumnWidth(10, 3000);
-        workbook.getSheetAt(0).setColumnWidth(11, 6000);
-        workbook.getSheetAt(0).setColumnWidth(12, 3000);
     }
 
 
